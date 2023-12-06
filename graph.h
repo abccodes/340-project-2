@@ -19,11 +19,15 @@ private:
     Node** adjList;    // Array of pointers to head nodes of the adjacency lists
 
 public:
+
     // Constructor, marked explicit to prevent implicit conversion
     explicit graph(int numVertices);
 
     // Destructor
     ~graph();
+
+    // Method to add a new vertex to the graph
+    void addVertex();
 
     // Method to add an edge between source and destination vertices
     void addEdge(int src, int dest);
@@ -31,11 +35,9 @@ public:
     // Breadth-First Search (BFS) traversal starting from a given source
     void breadthFistSearch(int vertexS);
 
-    // Method to print BFS traversal starting from a given source
-//    void printBFS(int source);
-
-    // Method to print the shortest path from source to destination
-//    void printPath(int source, int destination);
+    // to do
+    //printing out graph
+    void printGraph();
 };
 
 #endif //PROJECT2_GRAPH_H

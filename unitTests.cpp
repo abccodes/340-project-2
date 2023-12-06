@@ -6,14 +6,19 @@
 #include <cassert>
 
 void runUnitTests() {
+    // Create a g with 3 vertices
+    graph g(3);
+
+    g.addEdge(1,2 );
+    g.addEdge(1,3 );
+    g.addEdge(3,4 );
+
+    g.printGraph();
     // Create a g with 4 vertices
-    std::cout << "Shortest path from 3 to 0: ";
-    std::cout << "\n";
+//    std::cout << "Shortest path from 3 to 0: ";
+//    std::cout << "\n";
 }
 
-
-
-graph g(4);
 //
 //    // Add edges
 //    g.addEdge(0, 1);

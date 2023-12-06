@@ -6,6 +6,7 @@
 
 // Constructor for the graph class
 graph::graph(int numVertices) {
+    numVertices++;
     // Initializing the number of vertices in the graph
     this->numVertices = numVertices;
 
@@ -36,15 +37,46 @@ graph::~graph() {
     delete[] adjList;
 }
 
+// Method to add a new vertex to the graph
+void graph::addVertex() {
+    // Create a new array with increased size
+    int newNumVertices = numVertices + 1;
+    Node** newAdjList = new Node*[newNumVertices];
+
+    // Copy existing adjacency list to the new array
+    for (int i = 0; i < numVertices; i++) {
+        newAdjList[i] = adjList[i];
+    }
+
+    // Initialize the new vertex with nullptr
+    newAdjList[numVertices] = nullptr;
+
+    // Delete the old adjacency list
+    delete[] adjList;
+
+    // Update the member variables with the new values
+    adjList = newAdjList;
+    numVertices = newNumVertices;
+}
+
 // Method to add an edge between source and destination vertices
 void graph::addEdge(int src, int dest) {
-    // Create a new node for the destination v
+    // Create a new node for the destination vertex
     Node* newNode = new Node;
     newNode->v = dest;
+    newNode->next = nullptr;
 
-    // Add the new node to the beginning of the adjacency list for the source v
-    newNode->next = adjList[src];
-    adjList[src] = newNode;
+    // If the adjacency list for the source vertex is empty, set the new node as the head
+    if (adjList[src] == nullptr) {
+        adjList[src] = newNode;
+    } else {
+        // Otherwise, find the last node in the adjacency list and add the new node
+        Node* last = adjList[src];
+        while (last->next != nullptr) {
+            last = last->next;
+        }
+        last->next = newNode;
+    }
 }
 
 void graph::breadthFistSearch(int vertexS) {
@@ -84,80 +116,15 @@ void graph::breadthFistSearch(int vertexS) {
     delete[] visited;
 }
 
-//
-//void graph::BFS(int source) {
-//    enum Color { WHITE, GRAY, BLACK };
-//    Color* color = new Color[numVertices];
-//    int* distance = new int[numVertices];
-//    int* predecessor = new int[numVertices];
-//
-//    for (int i = 0; i < numVertices; i++) {
-//        color[i] = WHITE;
-//        distance[i] = INT_MAX;
-//        predecessor[i] = -1;
-//    }
-//
-//    std::queue<int> queue;
-//    color[source] = GRAY;
-//    distance[source] = 0;
-//    predecessor[source] = -1;
-//    queue.push(source);
-//
-//    while (!queue.empty()) {
-//        int u = queue.front();
-//        queue.pop();
-//
-//        Node* current = adjList[u];
-//        while (current != nullptr) {
-//            int v = current->v;
-//            if (color[v] == WHITE) {
-//                color[v] = GRAY;
-//                distance[v] = distance[u] + 1;
-//                predecessor[v] = u;
-//                queue.push(v);
-//            }
-//            current = current->next;
-//        }
-//        color[u] = BLACK;
-//    }
-//
-//    delete[] color;
-//    delete[] distance;
-//    delete[] predecessor;
-//}
-//
-//void graph::printBFS(int source) {
-//    BFS(source);
-//
-//    std::cout << "BFS Tree from source v " << source << ":\n";
-//    for (int i = 0; i < numVertices; i++) {
-//        std::cout << "v " << i << ": ";
-//        if (i == source) {
-//            std::cout << "Source";
-//        } else if (adjList[i] == nullptr) {
-//            std::cout << "Not reachable";
-//        } else {
-//            int parent = -1;
-//            Node* current = adjList[i];
-//            while (current != nullptr) {
-//                parent = current->v;
-//                current = current->next;
-//            }
-//            std::cout << parent;
-//        }
-//        std::cout << "\n";
-//    }
-//}
-//
-//void graph::printPath(int source, int destination) {
-//    if (destination == source) {
-//        std::cout << source;
-//    }
-//    else if (adjList[destination] == nullptr) {
-//        std::cout << "No path from " << source << " to " << destination << " exists\n";
-//    }
-//    else {
-//        printPath(source, adjList[destination]->v);
-//        std::cout << " -> " << destination;
-//    }
-//}
+// Method to print the adjacency list representation of the graph
+void graph::printGraph() {
+    for (int i = 1; i < numVertices; i++) {
+        std::cout << "Vertex " << i << " --> ";
+        Node* current = adjList[i];
+        while (current != nullptr) {
+            std::cout << current->v << " ";
+            current = current->next;
+        }
+        std::cout << std::endl;
+    }
+}
