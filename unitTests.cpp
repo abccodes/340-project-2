@@ -6,14 +6,20 @@
 #include <cassert>
 
 void runUnitTests() {
+    int rootNode = 1;
+    int numVertices = 3;
+
+
     // Create a g with 3 vertices
-    graph g(3);
+    graph g(numVertices);
 
     g.addEdge(1,2 );
     g.addEdge(1,3 );
     g.addEdge(3,4 );
 
     g.printGraph();
+
+    g.breadthFistSearch(rootNode);
     // Create a g with 4 vertices
 //    std::cout << "Shortest path from 3 to 0: ";
 //    std::cout << "\n";

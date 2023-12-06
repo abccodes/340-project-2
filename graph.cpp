@@ -80,40 +80,47 @@ void graph::addEdge(int src, int dest) {
 }
 
 void graph::breadthFistSearch(int vertexS) {
-    // Array to keep track of visited vertices
-    bool* visited = new bool[numVertices];
-    for (int i = 0; i < numVertices; i++) {
-        visited[i] = false;
-    }
-
-    // Create a queue for BFS
     std::queue<int> bfsQueue;
 
-    // Mark the current node as visited and enqueue it
-    visited[vertexS] = true;
-    bfsQueue.push(vertexS);
 
-    // Loop to visit all vertices in BFS order
-    while (!bfsQueue.empty()) {
-        // Dequeue a vertex from the queue and print it
-        int currentVertex = bfsQueue.front();
-        std::cout << currentVertex << " ";
-        bfsQueue.pop();
 
-        // Get all adjacent vertices of the dequeued vertex
-        // If an adjacent vertex is not visited, mark it as visited and enqueue it
-        Node* current = adjList[currentVertex];
-        while (current != nullptr) {
-            int adjacentVertex = current->v;
-            if (!visited[adjacentVertex]) {
-                visited[adjacentVertex] = true;
-                bfsQueue.push(adjacentVertex);
-            }
-            current = current->next;
-        }
-    }
-    // Clean up allocated memory
-    delete[] visited;
+
+
+// Mark all vertices as not visited
+//    bool* visited = new bool[numVertices];
+//    for (int i = 0; i < numVertices; i++) {
+//        visited[i] = false;
+//    }
+//
+//    // Create a queue for BFS
+//    std::queue<int> bfsQueue;
+//
+//    // Mark the current vertex as visited and enqueue it
+//    visited[vertexS] = true;
+//    bfsQueue.push(vertexS);
+//
+//
+//    while (!bfsQueue.empty()) {
+//
+//        // Dequeue a vertex from the queue and print it
+//        int currentVertex = bfsQueue.front();
+//        std::cout << currentVertex << " " << std::endl;
+//        bfsQueue.pop();
+//        // Get all adjacent vertices of the dequeued vertex
+//        // If an adjacent vertex has not been visited, mark it as visited and enqueue it
+//        Node* current = adjList[currentVertex];
+//        while (current != nullptr) {
+//            int adjacentVertex = current->v;
+//            if (!visited[adjacentVertex]) {
+//                visited[adjacentVertex] = true;
+//                bfsQueue.push(adjacentVertex);
+//            }
+//            current = current->next;
+//        }
+//    }
+//
+//    // Clean up dynamically allocated memory
+//    delete[] visited;
 }
 
 // Method to print the adjacency list representation of the graph
