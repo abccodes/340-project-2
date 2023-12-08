@@ -42,15 +42,19 @@ void testBFS() {
 // Testing if print path is working as expected
 void testPrintPath() {
     // Create a graph with 4 vertices
-    graph g(4);
+    graph g(5);
 
     // Add edges
-    g.addEdge(1, 3);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
     g.addEdge(1, 2);
-    g.addEdge(3, 4);
+    g.addEdge(1, 0);
+    g.addEdge(2, 3);
+    g.addEdge(2, 0);
+    g.addEdge(2, 1);
+    g.addEdge(3, 3);
 
-    std::cout << "Print Path";
-    g.printPath(1, 4);
+    g.printPath(0, 3);
 
     std::cout << "\n";
 }

@@ -15,13 +15,13 @@ private:
         Node* next;    // Pointer to the next node in the list
     };
 
+    bool* visited;
     int numVertices;   // Number of vertices in the graph
     Node** adjList;    // Array of pointers to head nodes of the adjacency lists
 
 public:
     // Getters
-    int getNumVertices() const { return numVertices; }
-
+    [[nodiscard]] int getNumVertices() const { return numVertices; }
 
     // Constructor, marked explicit to prevent implicit conversion
     explicit graph(int numVertices);
@@ -37,10 +37,12 @@ public:
 
     // Breadth-First Search (BFS) traversal starting from a given source
     void breadthFistSearch(int vertexS);
+
+    // Method to print the BFS traversal of the graph
     void printBFS(int vertexS);
 
-
-    void printPath(int source, int destination);
+    // Method to print the path from source to destination
+    void printPath(int current, int destination);
 
 //    void printGraph();
 

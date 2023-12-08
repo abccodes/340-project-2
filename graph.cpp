@@ -17,6 +17,13 @@ graph::graph(int numVertices) {
     for (int i = 0; i < numVertices; i++) {
         adjList[i] = nullptr;
     }
+
+    // Initialize the visited array to false for all vertices
+    visited = new bool[numVertices];
+    for (int i = 0; i < numVertices; i++) {
+        visited[i] = false;
+    }
+
 }
 
 // Destructor for the graph class
@@ -35,6 +42,8 @@ graph::~graph() {
 
     // Delete the array of adjacency lists
     delete[] adjList;
+    delete[] visited;
+
 }
 
 // Method to add a new vertex to the graph
@@ -79,25 +88,37 @@ void graph::addEdge(int src, int dest) {
     }
 }
 
+
 void graph::breadthFistSearch(int vertexS) {}
 
 void graph::printBFS(int vertexS) {}
 
-void graph::printPath(int source, int current) {
-    // Base case: If the current vertex is the source, print it
-    if (current == source) {
-        std::cout << source;
-    }
-    // If the adjacency list for the current vertex is empty, no path exists
-    else if (adjList[current] == nullptr) {
-        std::cout << "No path from " << source << " to " << current << " exists\n";
-    }
-    else {
-        // Recursively call printPath for the predecessor vertex
-        printPath(source, adjList[current]->v);
-        std::cout << " -> " << current;
+// This function recursively prints the path from the current node to the destination node
+void graph::printPath(int current, int destination) {
+    // Mark the current node as visited
+    visited[current] = true;
+
+    // Check if the current node is the destination
+    if (current == destination) {
+        std::cout << current << " " << std::endl;
+        std::cout << "Found Path" << std::endl;
+    } else {
+        // Print the current node and arrow symbol indicating the path
+        std::cout << current << "->";
+
+        // Traverse through the neighbors of the current node
+        Node* neighbor = adjList[current];
+        while (neighbor != nullptr) {
+        // Recursively call the function for unvisited neighbors
+            if (!visited[neighbor->v]) {
+                printPath(neighbor->v, destination);
+            }
+            neighbor = neighbor->next;
+        }
     }
 }
+
+
 
 // Method to print the adjacency list representation of the graph
 //void graph::printGraph() {
