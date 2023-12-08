@@ -3,6 +3,7 @@
 //
 
 #include "graph.h"
+#include <list>
 
 // Constructor for the graph class
 graph::graph(int numVertices) {
@@ -23,7 +24,6 @@ graph::graph(int numVertices) {
     for (int i = 0; i < numVertices; i++) {
         visited[i] = false;
     }
-
 }
 
 // Destructor for the graph class
@@ -32,7 +32,7 @@ graph::~graph() {
     for (int i = 0; i < numVertices; i++) {
         Node* current = adjList[i];
 
-        // Delete all nodes in the adjacency list for the current v
+        // Delete all nodes in the adjacency list for the current vertex
         while (current != nullptr) {
             Node* temp = current;
             current = current->next;
@@ -42,8 +42,9 @@ graph::~graph() {
 
     // Delete the array of adjacency lists
     delete[] adjList;
-    delete[] visited;
 
+    // Delete the array of visited vertices
+    delete[] visited;
 }
 
 // Method to add a new vertex to the graph
@@ -88,47 +89,85 @@ void graph::addEdge(int src, int dest) {
     }
 }
 
+void graph::BFS(int startVertex) {
+    // Create an array to keep track of visited vertices
+    visited = new bool[numVertices];
 
-void graph::breadthFistSearch(int vertexS) {}
+    // Initialize all vertices as not visited
+    for (int i = 0; i < numVertices; i++)
+        visited[i] = false;
 
-void graph::printBFS(int vertexS) {}
+    // Create a queue for BFS
+    std::list<int> queue;
 
-// This function recursively prints the path from the current node to the destination node
+    // Mark the current vertex as visited and enqueue it
+    visited[startVertex] = true;
+    queue.push_back(startVertex);
+
+    // BFS loop
+    while (!queue.empty()) {
+        // Dequeue a vertex from the queue and print it
+        int currVertex = queue.front();
+        std::cout << "-> " << currVertex << " ";
+        queue.pop_front();
+
+        // Get all adjacent vertices of the dequeued vertex
+        Node* currentNode = adjList[currVertex];
+        while (currentNode != nullptr) {
+            // Get the value of the adjacent vertex
+            int adjVertex = currentNode->v;
+
+            // If the adjacent vertex is not visited, mark it as visited and enqueue it
+            if (!visited[adjVertex]) {
+                visited[adjVertex] = true;
+                queue.push_back(adjVertex);
+            }
+
+            // Move to the next adjacent vertex in the linked list
+            currentNode = currentNode->next;
+        }
+    }
+
+    // Print a newline after the BFS traversal is complete
+    std::cout << std::endl;
+}
+
 void graph::printPath(int current, int destination) {
-    // Mark the current node as visited
-    visited[current] = true;
-
     // Check if the current node is the destination
     if (current == destination) {
         std::cout << current << " " << std::endl;
         std::cout << "Found Path" << std::endl;
     } else {
+        // Mark the current node as visited before traversing its neighbors
+        visited[current] = true;
+
         // Print the current node and arrow symbol indicating the path
         std::cout << current << "->";
 
         // Traverse through the neighbors of the current node
-        Node* neighbor = adjList[current];
-        while (neighbor != nullptr) {
-        // Recursively call the function for unvisited neighbors
-            if (!visited[neighbor->v]) {
-                printPath(neighbor->v, destination);
+        Node* next = adjList[current];
+        while (next != nullptr) {
+            // Recursively call the function for unvisited neighbor nodes
+            if (!visited[next->v]) {
+                printPath(next->v, destination);
             }
-            neighbor = neighbor->next;
+            next = next->next;
         }
+
+        // Unmark the current node after traversing its neighbors
+        visited[current] = false;
     }
 }
 
-
-
 // Method to print the adjacency list representation of the graph
-//void graph::printGraph() {
-//    for (int i = 1; i < numVertices; i++) {
-//        std::cout << "Vertex " << i << " --> ";
-//        Node* current = adjList[i];
-//        while (current != nullptr) {
-//            std::cout << current->v << " ";
-//            current = current->next;
-//        }
-//        std::cout << std::endl;
-//    }
-//}
+void graph::printGraph() {
+    for (int i = 1; i < numVertices; i++) {
+        std::cout << "Vertex " << i << " --> ";
+        Node* current = adjList[i];
+        while (current != nullptr) {
+            std::cout << current->v << " ";
+            current = current->next;
+        }
+        std::cout << std::endl;
+    }
+}

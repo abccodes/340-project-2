@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <queue>
+#include <list>
 
 class graph {
 private:
@@ -36,15 +37,14 @@ public:
     void addEdge(int src, int dest);
 
     // Breadth-First Search (BFS) traversal starting from a given source
-    void breadthFistSearch(int vertexS);
-
-    // Method to print the BFS traversal of the graph
-    void printBFS(int vertexS);
+    // Also prints BFS traversal of graph starting at vertex
+    void BFS(int vertexS);
 
     // Method to print the path from source to destination
     void printPath(int current, int destination);
 
-//    void printGraph();
+    // Method to print the whole graph
+    void printGraph();
 
 };
 

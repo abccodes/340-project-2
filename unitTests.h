@@ -7,6 +7,8 @@
 #ifndef PROJECT2_UNITTESTS_H
 #define PROJECT2_UNITTESTS_H
 
+void demo();
+
 void testConstructor();
 
 void testDestructor();
@@ -18,5 +20,7 @@ void testAddEdge();
 void testBFS();
 
 void testPrintPath();
+
+void printGraph();
 
 #endif //PROJECT2_UNITTESTS_H

@@ -4,14 +4,16 @@
 int main() {
     // Running unit tests
     std::cout << "-----------  Unit Tests -----------" << std::endl;
-//    testDestructor();
+    // WIP
 //    testAddVertex();
 //    testAddEdge();
-//    testBFS();
-//
+//    testPrintPath();
+//    testPrintPath();
 //    // Done
-//    testConstructor();
-    testPrintPath();
+    testConstructor();
+//    testDestructor();
+    testBFS();
+    printGraph();
 
     std::cout << "-----------------------------------" << std::endl;
 
