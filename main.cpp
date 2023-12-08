@@ -3,7 +3,7 @@
 
 int main() {
     // Running unit tests
-    std::cout << "-----------  Unit Tests -----------" << std::endl;
+//    std::cout << "-----------  Unit Tests -----------" << std::endl;
 //    std::cout << "------------------- testPrintPath -------------------" << std::endl;
 //    testPrintPath();
 //    std::cout << "------------------- testAddVertex -------------------" << std::endl;
@@ -18,9 +18,9 @@ int main() {
 //    testBFS();
 // print graph helper func
 //    printGraph();
-    std::cout << "-----------------------------------" << std::endl;
+//    std::cout << "-----------------------------------" << std::endl;
 
-//    demo();
+    demo();
 
     return 0;
 }
