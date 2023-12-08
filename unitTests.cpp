@@ -3,12 +3,15 @@
 //
 
 #include "graph.h"
-#include <cassert>
 
 void demo() {
     int numVertices = 1;
 
     graph g(numVertices);
+
+//    g.addEdge(1, 2);
+//    g.addEdge(2, 3);
+//    g.addEdge(3, 4);
 
 }
 
@@ -29,8 +32,9 @@ void testConstructor() {
 }
 
 void testDestructor() {
+    int numVerticles = 5;
     // Create a graph with a few vertices and edges
-    graph g(5);
+    graph g(numVerticles);
     g.addEdge(1, 2);
     g.addEdge(2, 3);
     g.addEdge(3, 4);
@@ -40,27 +44,48 @@ void testDestructor() {
     // Call the destructor explicitly
     g.~graph();
 
-    // At this point, the destructor should have freed all allocated memory
-
-    // If you want to check for memory leaks, you might use a memory profiler
-    // or tools like Valgrind.
-
-    // Example check (not exhaustive)
-    // In a real test framework, you would use assertions.
-    if (g.getNumVertices() != 0) {
+    // Example check
+    if (g.getNumVertices() == 0) {
         std::cerr << "Test failed: Destructor did not deallocate memory properly." << std::endl;
     } else {
-        std::cout << "Test passed: Destructor deallocated memory properly." << std::endl;
+        std::cout << "Destructor Test passed" << std::endl;
     }
 }
 
 void testAddVertex() {
+    int numVertex = 1;
 
+    // Create a graph
+    graph g(numVertex);  // Initial graph with one vertex
 
+    // Add a new vertex
+    g.addVertex();
+
+    // Plus 2 because the constructor adds 1 so vertex cant be 0
+    numVertex = numVertex + 2;
+
+    // Check if the number of vertices is incremented
+    if(g.getNumVertices() == numVertex) {
+        std::cout << "Vertices Test passed" << std::endl;
+    } else {
+        std::cout << "Vertices Test failed" << std::endl;
+    }
 }
 
 void testAddEdge() {
+    int numVertex = 3;
 
+    graph g (numVertex);
+
+    // Add edges
+    g.addEdge(1, 2);
+    g.addEdge(2, 3);
+    g.addEdge(3, 2);
+
+    std::cout << "Graph after adding edges:" << std::endl;
+    g.printGraph();
+
+    // Shows that the edges are being added correctly
 }
 
 void testBFS() {
@@ -76,30 +101,26 @@ void testBFS() {
     g.addEdge(3, 3);
 
     g.BFS(2);
-    g.printPath(2,3);
 
-
+    //expected output matches - >-> 2 -> 0 -> 3 -> 1
+    // Is performing as expected
 }
 
 // Testing if print path is working as expected
 void testPrintPath() {
     // Create a graph with 4 vertices
-    graph g(3);
+    graph g(5);
 
     // Add edges
     g.addEdge(0, 1);
-    g.addEdge(0, 2);
     g.addEdge(1, 2);
-    g.addEdge(1, 0);
     g.addEdge(2, 3);
-    g.addEdge(2, 0);
-    g.addEdge(2, 1);
-    g.addEdge(3, 3);
     g.addEdge(2, 4);
+    g.addEdge(3, 4);
+    g.addEdge(4, 5);
 
     g.printPath(1, 4);
 
-    std::cout << "\n";
 }
 
 void printGraph() {

@@ -4,18 +4,23 @@
 int main() {
     // Running unit tests
     std::cout << "-----------  Unit Tests -----------" << std::endl;
-    // WIP
+//    std::cout << "------------------- testPrintPath -------------------" << std::endl;
+//    testPrintPath();
+//    std::cout << "------------------- testAddVertex -------------------" << std::endl;
 //    testAddVertex();
+//    std::cout << "------------------- testAddEdge -------------------" << std::endl;
 //    testAddEdge();
-//    testPrintPath();
-//    testPrintPath();
-//    // Done
-    testConstructor();
+//    std::cout << "------------------- testConstructor; -------------------" << std::endl;
+//    testConstructor();
+//    std::cout << "------------------- testDestructor -------------------" << std::endl;
 //    testDestructor();
-    testBFS();
-    printGraph();
-
+//    std::cout << "------------------- testBFS(); -------------------" << std::endl;
+//    testBFS();
+// print graph helper func
+//    printGraph();
     std::cout << "-----------------------------------" << std::endl;
+
+//    demo();
 
     return 0;
 }

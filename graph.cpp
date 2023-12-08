@@ -28,22 +28,18 @@ graph::graph(int numVertices) {
 
 // Destructor for the graph class
 graph::~graph() {
-    // Loop through each vertex in the graph
+//     Delete the adjacency list
     for (int i = 0; i < numVertices; i++) {
         Node* current = adjList[i];
-
-        // Delete all nodes in the adjacency list for the current vertex
         while (current != nullptr) {
-            Node* temp = current;
-            current = current->next;
-            delete temp;
+            Node* next = current->next;
+            delete current;
+            current = next;
         }
     }
-
-    // Delete the array of adjacency lists
     delete[] adjList;
 
-    // Delete the array of visited vertices
+//     Delete the visited array
     delete[] visited;
 }
 
@@ -135,27 +131,24 @@ void graph::BFS(int startVertex) {
 void graph::printPath(int current, int destination) {
     // Check if the current node is the destination
     if (current == destination) {
-        std::cout << current << " " << std::endl;
-        std::cout << "Found Path" << std::endl;
+        std::cout << current << " Found Path" << std::endl;
     } else {
-        // Mark the current node as visited before traversing its neighbors
-        visited[current] = true;
-
-        // Print the current node and arrow symbol indicating the path
-        std::cout << current << "->";
+        // Print the current node
+        std::cout << current << " -> ";
 
         // Traverse through the neighbors of the current node
         Node* next = adjList[current];
         while (next != nullptr) {
-            // Recursively call the function for unvisited neighbor nodes
+            // Check if the neighbor has not been visited
             if (!visited[next->v]) {
+                // Mark the neighbor as visited
+                visited[next->v] = true;
+
+                // Recursively call the function for the unvisited neighbor
                 printPath(next->v, destination);
             }
             next = next->next;
         }
-
-        // Unmark the current node after traversing its neighbors
-        visited[current] = false;
     }
 }
 
