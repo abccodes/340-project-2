@@ -2,6 +2,13 @@
 #include "unitTests.h"
 
 int main() {
-    runUnitTests();
+    testConstructor();
+    testDestructor();
+    testAddVertex();
+    testAddEdge();
+    testBFS();
+
+    // Done
+    testPrintPath();
     return 0;
 }

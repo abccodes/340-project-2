@@ -5,52 +5,52 @@
 #include "graph.h"
 #include <cassert>
 
-void runUnitTests() {
-    int rootNode = 1;
+void testConstructor() {
     int numVertices = 3;
 
-
-    // Create a g with 3 vertices
+    // Create a graph with 3 vertices
     graph g(numVertices);
 
-    g.addEdge(1,2 );
-    g.addEdge(1,3 );
-    g.addEdge(3,4 );
+    numVertices++;
 
-    g.printGraph();
-
-    g.breadthFistSearch(rootNode);
-    // Create a g with 4 vertices
-//    std::cout << "Shortest path from 3 to 0: ";
-//    std::cout << "\n";
+    // Verify that the number of vertices is initialized correctly
+    if (g.getNumVertices() == numVertices) {
+        std::cout << "Graph constructor Passed" << std::endl;
+    } else {
+        std::cerr << "Graph constructor test failed: Incorrect number of vertices" << std::endl;
+    }
 }
 
-//
-//    // Add edges
-//    g.addEdge(0, 1);
-//    g.addEdge(0, 2);
-//    g.addEdge(1, 2);
-//    g.addEdge(2, 0);
-//    g.addEdge(2, 3);
-//    g.addEdge(3, 3);
-//
-//    // Perform BFS from source vertex 2
-//    g.BFS(2);
-//
-//    // Test BFS Tree
-//    std::cout << "BFS Tree:\n";
-//    g.printBFS(2);
-//    std::cout << "\n";
-//
-//    // Test shortest path
-//    std::cout << "Shortest path from 2 to 3: ";
-//    g.printPath(2, 3);
-//    std::cout << "\n";
-//
-//    std::cout << "Shortest path from 0 to 3: ";
-//    g.printPath(0, 3);
-//    std::cout << "\n";
-//
-//    std::cout << "Shortest path from 1 to 2: ";
-//    g.printPath(1, 2);
-//    std::cout << "\n";
+void testDestructor() {
+
+
+}
+
+void testAddVertex() {
+
+
+}
+
+void testAddEdge() {
+
+}
+
+void testBFS() {
+
+}
+
+// Testing if print path is working as expected
+void testPrintPath() {
+    // Create a graph with 4 vertices
+    graph g(4);
+
+    // Add edges
+    g.addEdge(1, 3);
+    g.addEdge(1, 2);
+    g.addEdge(3, 4);
+
+    std::cout << "Print Path";
+    g.printPath(1, 4);
+
+    std::cout << "\n";
+}

@@ -7,6 +7,16 @@
 #ifndef PROJECT2_UNITTESTS_H
 #define PROJECT2_UNITTESTS_H
 
-void runUnitTests();
+void testConstructor();
+
+void testDestructor();
+
+void testAddVertex();
+
+void testAddEdge();
+
+void testBFS();
+
+void testPrintPath();
 
 #endif //PROJECT2_UNITTESTS_H

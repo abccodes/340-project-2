@@ -19,6 +19,9 @@ private:
     Node** adjList;    // Array of pointers to head nodes of the adjacency lists
 
 public:
+    // Getters
+    int getNumVertices() const { return numVertices; }
+
 
     // Constructor, marked explicit to prevent implicit conversion
     explicit graph(int numVertices);
@@ -34,10 +37,13 @@ public:
 
     // Breadth-First Search (BFS) traversal starting from a given source
     void breadthFistSearch(int vertexS);
+    void printBFS(int vertexS);
 
-    // to do
-    //printing out graph
-    void printGraph();
+
+    void printPath(int source, int destination);
+
+//    void printGraph();
+
 };
 
 #endif //PROJECT2_GRAPH_H
